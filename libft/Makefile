@@ -15,32 +15,49 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
 
-LIBFT_PATH = ./srcs/libft
-PRINTF_PATH = ./srcs/printf
-GNL_PATH = ./srcs/gnl
+SRC_LIBFT = srcs/libft
+SRC_PRINTF = srcs/printf
 
-LIBFT = $(LIBFT_PATH)/libft.a
+SRC_LIBFT_FILES = $(wildcard $(SRC_LIBFT)/*.c)
+SRC_PRINTF_FILES = $(wildcard $(SRC_PRINTF)/*.c)
+
+OBJS_LIBFT = $(patsubst $(SRC_LIBFT)/%.c,srcs/libft/objs/%.o,$(SRC_LIBFT_FILES))
+OBJS_PRINTF = $(patsubst $(SRC_PRINTF)/%.c,srcs/printf/objs/%.o,$(SRC_PRINTF_FILES))
+
+OBJS = $(OBJS_LIBFT) $(OBJS_PRINTF)
 
 AR = ar -rcs
 
 RM = rm -f
 
-SOURCES =	$(wildcard $(LIBFT_PATH)/*c) \
-			$(wildcard $(PRINTF_PATH)/*c) \
-			$(wildcard $(GNL_PATH)/*.c)
+# Explicit list of objs directories
+OBJS_DIR_LIBFT = $(SRC_LIBFT)/objs
+OBJS_DIR_PRINTF = $(SRC_PRINTF)/objs
 
-OBJECTS = $(SOURCES:.c=.o)
+# LIBFT = $(LIBFT_PATH)/libft.a
+all : $(OBJS_DIR_LIBFT) $(OBJS_DIR_PRINTF) $(NAME)
 
-all : $(NAME)
+$(NAME): $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 
-$(NAME) : $(OBJECTS)
-	$(AR) $(NAME) $(OBJECTS)
+# Rule for libft sources
+$(SRC_LIBFT)/objs/%.o: $(SRC_LIBFT)/%.c | $(OBJS_DIR_LIBFT)
+	$(CC) $(CFLAGS) -c $< -o $@ -I./ -I. -I./srcs/printf
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I ./ -I $(LIBFT_PATH) -I $(PRINTF_PATH) -I $(GNL_PATH)
+$(SRC_PRINTF)/objs/%.o: $(SRC_PRINTF)/%.c | $(OBJS_DIR_PRINTF)
+	$(CC) $(CFLAGS) -c $< -o $@ -I./ -I./srcs/printf
+
+$(OBJS_DIR_LIBFT):
+	mkdir -p $@
+
+$(OBJS_DIR_PRINTF):
+	mkdir -p $@
 
 clean :
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJS)
+	find srcs/ -type f -name '*.o' -delete
+	$(RM) -r $(OBJS_DIR_LIBFT)
+	$(RM) -r $(OBJS_DIR_PRINTF)
 
 fclean : clean
 	$(RM) $(NAME)
