@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseki <rseki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 09:34:23 by rseki             #+#    #+#             */
-/*   Updated: 2025/04/03 09:28:25 by rseki            ###   ########.fr       */
+/*   Updated: 2024/09/11 12:07:00 by rseki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "../../libft.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -25,7 +26,7 @@
 
 char	*get_next_line(int fd);
 
-size_t	ft_strlen(const char *str);
+// size_t	ft_strlen(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strchr(const char *s, size_t c);

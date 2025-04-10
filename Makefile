@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L./libft -L./libft/srcs/printf
+LDFLAGS = -L./libft -L./libft/srcs/printf -L./libft/srcs/gnl
 
 #Directory for OBJECTS
 OBJDIR = objs
@@ -19,6 +19,7 @@ EXEC = $(NAME)
 
 #Object files for solong
 SOURCES = $(wildcard srcs/*.c)
+SOURCES := $(filter-out srcs/test.c, $(SOURCES))
 
 #Store object files in objs
 OBJECTS = $(patsubst srcs/%.c, $(OBJDIR)/%.o, $(SOURCES))
