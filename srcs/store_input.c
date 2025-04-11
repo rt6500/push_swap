@@ -12,59 +12,29 @@
 
 #include "../push_swap.h"
 
+int	has_duplicate(int argc, char **argv)
+{
+	int	i;
+	int	j;
+	long	ni;
+	long	nj;
 
-// t_node	*ft_node_new(long num)
-// {
-// 	t_node	*new;
-
-// 	new = malloc(sizeof(t_node));
-// 	if (!new)
-// 		return (ft_printf("Error\nAllocation failed.\n"), 1);
-// 	new->num = num;
-// 	new->index = -1;
-// 	new->next = NULL;
-// 	new->prev = NULL;
-// 	return (new);
-// }
-
-// void	ft_node_add_back(t_node **stack, t_node *new)
-// {
-// 	t_node	*last;
-
-// 	if (!stack || !new)
-// 		return ;
-// 	if (!*stack)
-// 	{
-// 		*stack = new;
-// 		new->next = new;
-// 		new->prev = new;
-// 		return ;
-// 	}
-// 	last = (*stack)->prev;
-// 	last->next = new;
-// 	new->prev = last;
-// 	new->next = *stack;
-// 	(*stack)->prev = new;
-// }
-
-// void	free_stack(t_node **stack)
-// {
-// 	t_node	*cur;
-// 	t_node	*next;
-
-// 	if (!stack || !*stack)
-// 		return ;
-// 	cur = *stack;
-// 	next = cur->next;
-// 	while (next != *stack)
-// 	{
-// 		free(cur);
-// 		cur = next;
-// 		next = next->next;
-// 	}
-// 	free(cur);
-// 	*stack = NULL;
-// }
+	i = 1;
+	while (i < argc)
+	{
+		j = i + 1;
+		ni = ft_atoi_ps(argv[i]);
+		while (j < argc)
+		{
+			nj = ft_atoi_ps(argv[j]);
+			if (ni == nj)
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	is_number(char *str)
 {
@@ -74,7 +44,7 @@ int	is_number(char *str)
 		return (1);
 	while (*str)
 	{
-		if (*str < '0' || '9' < *str)
+		if (!ft_isdigit(*str))
 			return (1);
 		str++;
 	}
@@ -87,12 +57,14 @@ int	check_input(int argc, char **argv)
 
 	i = 1;
 	if (argc < 2)
-		return (ft_printf("Usage: %s num1 num2 ...\n", argv[0]), 1);
+		return (ft_printf("Error\nUsage: %s num1 num2 ...\n", argv[0]), 1);
 	while (i < argc)
 	{
-		if (is_number(argv[i]) == 1)
-			return (ft_printf("Error: Invalid input: %s\n", argv[i]), 1);
+		if (is_number(argv[i]))
+			return (ft_printf("Error\nInvalid input: %s\n", argv[i]), 1);
 		i++;
 	}
+	if (has_duplicate(argc, argv))
+		return (ft_printf("Error\nDuplicated number\n"), 1);
 	return (0);
 }

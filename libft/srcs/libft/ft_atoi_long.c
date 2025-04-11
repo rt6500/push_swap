@@ -10,16 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <limits.h>
-#include <string.h>
-#include <ctype.h>
 #include "../../libft.h"
 
 #define OVERFLOW_ERROR -1
 #define UNDERFLOW_ERROR -2
 
-const char	parse_sign_and_skip(char **str_ptr)
+static int	parse_sign_and_skip(char **str_ptr)
 {
 	int		sign;
 	char	*str;
@@ -39,10 +35,10 @@ const char	parse_sign_and_skip(char **str_ptr)
 	return (sign);
 }
 
-long	ft_atoi_long(const char *str)
+int	ft_atoi_long(const char *str)
 {
 	int		sign;
-	long	result;
+	long long	result;
 	char	*ptr;
 
 	result = 0;
@@ -67,13 +63,15 @@ long	ft_atoi_long(const char *str)
 	return (result * sign);
 }
 
-int main(void)
-
-{
-    char *str1 = "-9223372036854775809";
-    // char *str2 = "123";
-    printf("LONG_MIN = %ld\n", LONG_MIN);
-    printf("LONG_MAX = %ld\n", LONG_MAX);
-    printf("ft_atoi_long: %ld\n", ft_atoi_long(str1));
-    return (0);
-}
+// #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+// int main(void)
+// {
+//     char *str1 = "-9223372036854775809";
+//     // char *str2 = "123";
+//     printf("LONG_MIN = %ld\n", LONG_MIN);
+//     printf("LONG_MAX = %ld\n", LONG_MAX);
+//     printf("ft_atoi_long: %ld\n", ft_atoi_long(str1));
+//     return (0);
+// }
