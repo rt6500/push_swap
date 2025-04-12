@@ -48,6 +48,7 @@ int		ft_atoi_ps(const char *str);
 //build_stack.c
 t_node	*ft_node_new(long num, int i);
 void	ft_node_add_back(t_node **stack, t_node *new);
+t_node *array_to_stack(int *argc, char **argv);
 t_node	*build_stack(int argc, char **argv);
 
 //sort_few.c
