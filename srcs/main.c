@@ -61,8 +61,7 @@ int	main(int argc, char **argv)
 	t_node	*stack_a;
 
 	stack_a = NULL;
-	ft_printf("check_input: %d\n", check_input(argc, argv));
-	if (check_input(argc, argv) == 0)
+	if (process_input(argc, argv) == 0)
 		stack_a = build_stack(argc, argv);
 	sort_few(stack_a);
 	free_stack(&stack_a);

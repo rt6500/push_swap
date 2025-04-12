@@ -38,8 +38,9 @@ void	free_stack(t_node **stack);
 
 //store_input.c
 int		has_duplicate(int argc, char **argv);
-int		is_number(char *str);
-int		check_input(int argc, char **argv);
+int		is_invalid_number(char *str);
+char	**process_two_args(int *argc, char ** argv);
+int	process_input(int argc, char **argv);
 
 //ft_atoi_ps.c
 int		ft_atoi_ps(const char *str);

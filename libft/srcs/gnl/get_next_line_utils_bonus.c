@@ -54,21 +54,21 @@ void	ft_bzero(void *s, size_t n)
 // 	return (tmp);
 // }
 
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
+// char	*ft_strchr(const char *s, int c)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (1)
-	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		if (s[i] == '\0')
-			break ;
-		i++;
-	}
-	return (NULL);
-}
+// 	i = 0;
+// 	while (1)
+// 	{
+// 		if (s[i] == (char)c)
+// 			return ((char *)(s + i));
+// 		if (s[i] == '\0')
+// 			break ;
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
 
 char	*ft_strjoin_gnl(char const *s1, char const *s2)
 {

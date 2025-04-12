@@ -24,10 +24,10 @@ int count_nodes(t_node *stack)
     t_node  *cur;
     int     count;
 
-    count = 0;
+    count = 1;
     if (!stack)
         return (0);
-    cur = stack;
+    cur = stack->next;
     while (cur != stack)
     {
         cur = cur->next;
@@ -40,8 +40,6 @@ int count_nodes(t_node *stack)
 int sort_few(t_node *stack)
 {
     int count;
-    if (stack)
-        write(1, "asad\n", 5);
     count = count_nodes(stack);
     if (count <= 1)
         return (1);

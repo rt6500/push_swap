@@ -19,7 +19,7 @@ int	has_duplicate(int argc, char **argv)
 	long	ni;
 	long	nj;
 
-	i = 1;
+	i = 0;
 	while (i < argc)
 	{
 		j = i + 1;
@@ -36,7 +36,7 @@ int	has_duplicate(int argc, char **argv)
 	return (0);
 }
 
-int	is_number(char *str)
+int	is_invalid_number(char *str)
 {
 	if (*str == '-' || *str == '+')
 		str++;
@@ -51,20 +51,59 @@ int	is_number(char *str)
 	return (0);
 }
 
-int	check_input(int argc, char **argv)
+
+
+char	**process_two_args(int *argc, char ** argv)
 {
+	char	**tmp;
+	char	**array;
+	int		i;
+
+	array = ft_split(argv[1], ' ');
+	tmp = array;
+	i = 0;
+	while (*tmp)
+	{
+		i++;
+		tmp++;
+	}
+	*argc = i;
+	i = 0;
+	while (array[i])
+	{
+		if (is_invalid_number(array[i]))
+			return (NULL);
+		i++;
+	}
+	if (has_duplicate(*argc, array))
+		return (NULL);
+	return (array);
+}
+
+int	process_input(int argc, char **argv)
+{
+	char **array;
 	int	i;
 
 	i = 1;
 	if (argc < 2)
 		return (ft_printf("Error\nUsage: %s num1 num2 ...\n", argv[0]), 1);
-	while (i < argc)
+	else if (argc == 2)
 	{
-		if (is_number(argv[i]))
-			return (ft_printf("Error\nInvalid input: %s\n", argv[i]), 1);
-		i++;
+		array = process_two_args(&argc, argv);
+		if (!array)
+			return (ft_printf("Error\nNot number or duplicated\n"), 1);
 	}
-	if (has_duplicate(argc, argv))
-		return (ft_printf("Error\nDuplicated number\n"), 1);
+	else
+	{
+		while (i < argc)
+		{
+			if (is_invalid_number(argv[i]))
+				return (ft_printf("Error\nInvalid input0\n"), 1);
+			i++;
+		}
+		if (has_duplicate(argc - 1, argv + 1))
+			return (ft_printf("Error\nDuplicated number\n"), 1);
+	}
 	return (0);
 }

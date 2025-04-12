@@ -47,28 +47,54 @@ void	ft_node_add_back(t_node **stack, t_node *new)
 	(*stack)->prev = new;
 }
 
-t_node	*build_stack(int argc, char **argv)
+
+t_node *array_to_stack(int *argc, char **argv)
 {
 	t_node	*stack;
+	char	**array;
+	int		i;
+	int		value;
+
+	i = 0;
+	stack = NULL;
+	array = process_two_args(argc, argv);
+	while (i < *argc)
+	{
+		value = ft_atoi_ps(array[i]);
+		ft_node_add_back(&stack, ft_node_new(value, -1));
+		i++;
+	}
+	return (stack);
+}
+
+t_node	*build_stack(int argc, char **argv)
+{
+	t_node	*a_stack;
 	t_node	*new_node;
 	int		i;
 
-	stack = NULL;
-	i = 1;
-	(void)argc;
-	while (i < argc)
+	a_stack = NULL;
+	if (argc > 2)
 	{
-		new_node = ft_node_new(ft_atoi_ps(argv[i]), i);
-		if (!new_node)
-			return (NULL);
-		ft_node_add_back(&stack, new_node);
-		i++;
+		i = 1;
+		(void)argc;
+		while (i < argc)
+		{
+			new_node = ft_node_new(ft_atoi_ps(argv[i]), i);
+			if (!new_node)
+				return (NULL);
+			ft_node_add_back(&a_stack, new_node);
+			i++;
+		}
+		return (a_stack);
 	}
-	// printf("stack->index: %d, stack->num: %d\n", stack->index, stack->num);
-	// printf("stack->next->index: %d, stack->next->num: %d\n", \
-	// 	stack->next->index, stack->next->num);
-	// printf("stack->prev->index: %d, stack->prev->num: %d\n", \
-	// 		stack->prev->index, stack->prev->num);
-	return (stack);
+	else if (argc == 2)
+		a_stack = array_to_stack(&argc, argv);
+	printf("a_stack->index: %d, a_stack->num: %d\n", a_stack->index, a_stack->num);
+	printf("a_stack->next->index: %d, a_stack->next->num: %d\n", \
+		a_stack->next->index, a_stack->next->num);
+	printf("a_stack->prev->index: %d, a_stack->prev->num: %d\n", \
+			a_stack->prev->index, a_stack->prev->num);
+	return (a_stack);
 }
 
