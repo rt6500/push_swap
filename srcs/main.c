@@ -37,16 +37,16 @@
 // 	}
 // 	return (stack);
 // }
-void	free_stack(t_node **stack)
+void	free_stack(t_stack **stack)
 {
 	t_node	*cur;
 	t_node	*next;
 
 	if (!stack || !*stack)
 		return ;
-	cur = *stack;
+	cur = (*stack)->top;
 	next = cur->next;
-	while (next != *stack)
+	while (next != (*stack)->top)
 	{
 		free(cur);
 		cur = next;
@@ -58,12 +58,13 @@ void	free_stack(t_node **stack)
 
 int	main(int argc, char **argv)
 {
-	t_node	*stack_a;
+	t_stack	*stack_a;
 
 	stack_a = NULL;
 	if (process_input(argc, argv) == 0)
 		stack_a = build_stack(argc, argv);
-	sort_few(stack_a);
+	// add_index(stack_a);
+	sort_few(&stack_a);
 	free_stack(&stack_a);
 	return (0);
 }

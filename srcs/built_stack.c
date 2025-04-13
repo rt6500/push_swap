@@ -27,74 +27,89 @@ t_node	*ft_node_new(long num, int i)
 	return (new);
 }
 
-void	ft_node_add_back(t_node **stack, t_node *new)
+void	ft_node_add_back(t_stack **stack, t_node *new)
 {
 	t_node	*last;
 
 	if (!stack || !new)
 		return ;
-	if (!*stack)
+	// if (!stack)
+	// 	write(1, "stack is NULL\n", 15);
+	// else if (!*stack)
+	// 	write(1, "*stack is NULL\n", 16);
+	if (!(*stack)->top)
 	{
-		*stack = new;
+		(*stack)->top = new;
 		new->next = new;
 		new->prev = new;
 		return ;
 	}
-	last = (*stack)->prev;
+	last = (*stack)->top->prev;
 	last->next = new;
 	new->prev = last;
-	new->next = *stack;
-	(*stack)->prev = new;
+	new->next = (*stack)->top;
+	(*stack)->top->prev = new;
 }
 
 
-t_node *array_to_stack(int *argc, char **argv)
+t_stack *array_to_stack(int *argc, char **argv)
 {
-	t_node	*stack;
+	t_stack	*stack;
 	char	**array;
 	int		i;
 	int		value;
-
+	
 	i = 0;
 	stack = NULL;
 	array = process_two_args(argc, argv);
+	write(1, "here_array_to\n", 14);
+
 	while (i < *argc)
 	{
+		ft_printf("i: %d, array[i]: %d\n", i, array[i]);
 		value = ft_atoi_ps(array[i]);
+		ft_printf("value: %d\n");
 		ft_node_add_back(&stack, ft_node_new(value, -1));
 		i++;
 	}
+	if (!stack)
+		write(1, "stack is NULL\n", 15);
+	ft_printf("stack->top->num: %d\n", stack->top->num);
 	return (stack);
 }
 
-t_node	*build_stack(int argc, char **argv)
+t_stack	*build_stack(int argc, char **argv)
 {
-	t_node	*a_stack;
+	t_stack	*stack_a;
 	t_node	*new_node;
 	int		i;
 
-	a_stack = NULL;
+	stack_a = malloc(sizeof(t_stack));
+	if (!stack_a)
+		return (NULL);
+	stack_a->top = NULL;
 	if (argc > 2)
 	{
 		i = 1;
-		(void)argc;
 		while (i < argc)
 		{
 			new_node = ft_node_new(ft_atoi_ps(argv[i]), i);
 			if (!new_node)
 				return (NULL);
-			ft_node_add_back(&a_stack, new_node);
+			ft_node_add_back(&stack_a, new_node);
 			i++;
 		}
-		return (a_stack);
 	}
 	else if (argc == 2)
-		a_stack = array_to_stack(&argc, argv);
-	printf("a_stack->index: %d, a_stack->num: %d\n", a_stack->index, a_stack->num);
-	printf("a_stack->next->index: %d, a_stack->next->num: %d\n", \
-		a_stack->next->index, a_stack->next->num);
-	printf("a_stack->prev->index: %d, a_stack->prev->num: %d\n", \
-			a_stack->prev->index, a_stack->prev->num);
-	return (a_stack);
+		stack_a = array_to_stack(&argc, argv);
+	if (stack_a->top)
+	{
+		printf("top->index: %d, top->num: %d\n", stack_a->top->index, stack_a->top->num);
+		printf("stack_a->next->index: %d, stack_a->next->num: %d\n", \
+			stack_a->top->next->index, stack_a->top->next->num);
+		printf("stack_a->prev->index: %d, stack_a->prev->num: %d\n", \
+				stack_a->top->prev->index, stack_a->top->prev->num);
+	}
+	return (stack_a);
 }
 

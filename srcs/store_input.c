@@ -51,15 +51,15 @@ int	is_invalid_number(char *str)
 	return (0);
 }
 
-
-
 char	**process_two_args(int *argc, char ** argv)
 {
 	char	**tmp;
 	char	**array;
 	int		i;
 
+	ft_printf("argv[1]: %s\n", argv[1]);
 	array = ft_split(argv[1], ' ');
+	ft_printf("array[0]: %d, array[1]: %d\n", array[0], array[1]);
 	tmp = array;
 	i = 0;
 	while (*tmp)
@@ -86,6 +86,7 @@ int	process_input(int argc, char **argv)
 	int	i;
 
 	i = 1;
+
 	if (argc < 2)
 		return (ft_printf("Error\nUsage: %s num1 num2 ...\n", argv[0]), 1);
 	else if (argc == 2)
@@ -99,7 +100,7 @@ int	process_input(int argc, char **argv)
 		while (i < argc)
 		{
 			if (is_invalid_number(argv[i]))
-				return (ft_printf("Error\nInvalid input0\n"), 1);
+				return (ft_printf("Error\nInvalid input\n"), 1);
 			i++;
 		}
 		if (has_duplicate(argc - 1, argv + 1))
