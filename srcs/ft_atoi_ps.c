@@ -14,7 +14,7 @@
 
 int	ft_atoi_ps(const char *str)
 {
-	int		sign;
+	int				sign;
 	long long int	result;
 
 	sign = 1;

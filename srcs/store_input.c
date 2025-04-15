@@ -6,7 +6,7 @@
 /*   By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:17:25 by rseki             #+#    #+#             */
-/*   Updated: 2025/04/10 12:19:51 by rseki            ###   ########.fr       */
+/*   Updated: 2025/04/15 11:12:24 by rseki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	has_duplicate(int argc, char **argv)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	long	ni;
 	long	nj;
 
@@ -51,7 +51,7 @@ int	is_invalid_number(char *str)
 	return (0);
 }
 
-char	**process_two_args(int *count, char ** argv)
+char	**process_two_args(int *count, char **argv)
 {
 	char	**array;
 	int		i;
@@ -74,11 +74,10 @@ char	**process_two_args(int *count, char ** argv)
 
 int	process_input(int argc, char **argv)
 {
-	char **array;
-	int	i;
+	char	**array;
+	int		i;
 
 	i = 1;
-
 	if (argc < 2)
 		return (ft_printf("Error\nUsage: %s num1 num2 ...\n", argv[0]), 1);
 	else if (argc == 2)
@@ -86,6 +85,8 @@ int	process_input(int argc, char **argv)
 		array = process_two_args(&argc, argv);
 		if (!array)
 			return (ft_printf("Error\nNot number or duplicated\n"), 1);
+		free(array);
+		array = NULL;
 	}
 	else
 	{

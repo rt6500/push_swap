@@ -47,7 +47,6 @@ void	ft_node_add_back(t_stack **stack, t_node *new)
 	(*stack)->top->prev = new;
 }
 
-
 t_stack	*array_to_stack(char **argv, t_stack *stack)
 {
 	char	**array;
@@ -61,28 +60,31 @@ t_stack	*array_to_stack(char **argv, t_stack *stack)
 		return (NULL);
 	while (i < count)
 	{
-		// ft_printf("i: %d, array[i]: %s\n", i, array[i]);
 		value = ft_atoi_ps(array[i]);
-		// ft_printf("value: %d\n", value);
 		ft_node_add_back(&stack, ft_node_new(value, -1));
 		i++;
 	}
 	if (!stack)
 		write(1, "stack is NULL\n", 15);
-	// ft_printf("stack->top->num: %d\n", stack->top->num);
+	free(array);
 	return (stack);
 }
 
-t_stack	*build_stack(int argc, char **argv)
+int	build_stack(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack	*stack_a;
+	// t_stack	*stack_a;
+	// t_stack *stack_b;
 	t_node	*new_node;
 	int		i;
 
-	stack_a = malloc(sizeof(t_stack));
-	if (!stack_a)
-		return (NULL);
-	stack_a->top = NULL;
+	*stack_a = ft_calloc(1, sizeof(t_stack));
+	*stack_b = ft_calloc(1, sizeof(t_stack));
+	if (!stack_a || !stack_b)
+		return (1);
+	write(1, "asdf\n", 5);
+	(*stack_a)->top = NULL;
+	write(1, "asdf\n", 5);
+	(*stack_b)->top = NULL;
 	if (argc > 2)
 	{
 		i = 1;
@@ -90,21 +92,12 @@ t_stack	*build_stack(int argc, char **argv)
 		{
 			new_node = ft_node_new(ft_atoi_ps(argv[i]), i);
 			if (!new_node)
-				return (NULL);
-			ft_node_add_back(&stack_a, new_node);
+				return (1);
+			ft_node_add_back(stack_a, new_node);
 			i++;
 		}
 	}
 	else if (argc == 2)
-		stack_a = array_to_stack(argv, stack_a);
-	// if (stack_a->top)
-	// {
-	// 	printf("top->index: %d, top->num: %d\n", stack_a->top->index, stack_a->top->num);
-	// 	printf("stack_a->next->index: %d, stack_a->next->num: %d\n", \
-	// 		stack_a->top->next->index, stack_a->top->next->num);
-	// 	printf("stack_a->prev->index: %d, stack_a->prev->num: %d\n", \
-	// 			stack_a->top->prev->index, stack_a->top->prev->num);
-	// }
-	return (stack_a);
+		*stack_a = array_to_stack(argv, *stack_a);
+	return (0);
 }
-
