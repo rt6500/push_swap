@@ -39,7 +39,7 @@ void	free_stack(t_stack **stack);
 //store_input.c
 int		has_duplicate(int argc, char **argv);
 int		is_invalid_number(char *str);
-char	**process_two_args(int *argc, char **argv);
+char	**process_two_args(int *count, char ** argv);
 int		process_input(int argc, char **argv);
 
 //ft_atoi_ps.c
@@ -48,7 +48,7 @@ int		ft_atoi_ps(const char *str);
 //build_stack.c
 t_node	*ft_node_new(long num, int i);
 void	ft_node_add_back(t_stack **stack, t_node *new);
-t_stack	*array_to_stack(int *argc, char **argv);
+t_stack	*array_to_stack(char **argv, t_stack *stack);
 t_stack	*build_stack(int argc, char **argv);
 
 //add_index.c

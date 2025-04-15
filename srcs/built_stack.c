@@ -31,12 +31,8 @@ void	ft_node_add_back(t_stack **stack, t_node *new)
 {
 	t_node	*last;
 
-	if (!stack || !new)
+	if (!stack || !new || !(*stack))
 		return ;
-	// if (!stack)
-	// 	write(1, "stack is NULL\n", 15);
-	// else if (!*stack)
-	// 	write(1, "*stack is NULL\n", 16);
 	if (!(*stack)->top)
 	{
 		(*stack)->top = new;
@@ -52,29 +48,28 @@ void	ft_node_add_back(t_stack **stack, t_node *new)
 }
 
 
-t_stack *array_to_stack(int *argc, char **argv)
+t_stack	*array_to_stack(char **argv, t_stack *stack)
 {
-	t_stack	*stack;
 	char	**array;
 	int		i;
 	int		value;
-	
-	i = 0;
-	stack = NULL;
-	array = process_two_args(argc, argv);
-	write(1, "here_array_to\n", 14);
+	int		count;
 
-	while (i < *argc)
+	i = 0;
+	array = process_two_args(&count, argv);
+	if (!array)
+		return (NULL);
+	while (i < count)
 	{
-		ft_printf("i: %d, array[i]: %d\n", i, array[i]);
+		// ft_printf("i: %d, array[i]: %s\n", i, array[i]);
 		value = ft_atoi_ps(array[i]);
-		ft_printf("value: %d\n");
+		// ft_printf("value: %d\n", value);
 		ft_node_add_back(&stack, ft_node_new(value, -1));
 		i++;
 	}
 	if (!stack)
 		write(1, "stack is NULL\n", 15);
-	ft_printf("stack->top->num: %d\n", stack->top->num);
+	// ft_printf("stack->top->num: %d\n", stack->top->num);
 	return (stack);
 }
 
@@ -101,15 +96,15 @@ t_stack	*build_stack(int argc, char **argv)
 		}
 	}
 	else if (argc == 2)
-		stack_a = array_to_stack(&argc, argv);
-	if (stack_a->top)
-	{
-		printf("top->index: %d, top->num: %d\n", stack_a->top->index, stack_a->top->num);
-		printf("stack_a->next->index: %d, stack_a->next->num: %d\n", \
-			stack_a->top->next->index, stack_a->top->next->num);
-		printf("stack_a->prev->index: %d, stack_a->prev->num: %d\n", \
-				stack_a->top->prev->index, stack_a->top->prev->num);
-	}
+		stack_a = array_to_stack(argv, stack_a);
+	// if (stack_a->top)
+	// {
+	// 	printf("top->index: %d, top->num: %d\n", stack_a->top->index, stack_a->top->num);
+	// 	printf("stack_a->next->index: %d, stack_a->next->num: %d\n", \
+	// 		stack_a->top->next->index, stack_a->top->next->num);
+	// 	printf("stack_a->prev->index: %d, stack_a->prev->num: %d\n", \
+	// 			stack_a->top->prev->index, stack_a->top->prev->num);
+	// }
 	return (stack_a);
 }
 

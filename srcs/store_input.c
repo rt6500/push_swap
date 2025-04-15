@@ -51,32 +51,24 @@ int	is_invalid_number(char *str)
 	return (0);
 }
 
-char	**process_two_args(int *argc, char ** argv)
+char	**process_two_args(int *count, char ** argv)
 {
-	char	**tmp;
 	char	**array;
 	int		i;
 
-	ft_printf("argv[1]: %s\n", argv[1]);
+	i = 0;
 	array = ft_split(argv[1], ' ');
-	ft_printf("array[0]: %d, array[1]: %d\n", array[0], array[1]);
-	tmp = array;
-	i = 0;
-	while (*tmp)
-	{
-		i++;
-		tmp++;
-	}
-	*argc = i;
-	i = 0;
+	if (!array)
+		return (NULL);
 	while (array[i])
 	{
 		if (is_invalid_number(array[i]))
 			return (NULL);
 		i++;
 	}
-	if (has_duplicate(*argc, array))
+	if (has_duplicate(i, array))
 		return (NULL);
+	*count = i;
 	return (array);
 }
 
