@@ -18,83 +18,76 @@
 #include "libft/srcs/gnl/get_next_line.h"
 #include "libft/srcs/printf/ft_printf.h"
 
-# define STACK_A 0
-# define STACK_B 1
-# define STACK_AB 2
-
 typedef struct s_node
 {
-	int		index;
 	int		num;
 	int		rank;
 	struct s_node	*prev;
 	struct s_node	*next;
-}	t_node;
-
-typedef struct s_stack
-{
-	t_node	*top;
 	int		count;
-}	t_stack;
+}	t_node;
 
 //main.c
 int		main(int argc, char **argv);
-void	free_stack(t_stack **stack);
+void	free_stack(t_node **stack);
 
-//store_input.c
+//validate_input.c
 int		has_duplicate(int argc, char **argv);
 int		is_invalid_number(char *str);
-char	**process_two_args(int *count, char ** argv);
-int		process_input(int argc, char **argv);
+char	**process_two_args(char **argv);
+int		validate_input(int argc, char **argv);
 
 //ft_atoi_ps.c
 int		ft_atoi_ps(const char *str);
 
 //build_stack.c
-t_node	*ft_node_new(long num, int i);
-void	ft_node_add_back(t_stack **stack, t_node *new);
-t_stack	*array_to_stack(char **argv, t_stack *stack);
-int		build_stack(int argc, char **argv, t_stack **stack_a, t_stack **stack_b);
+t_node	*ft_node_new(long num);
+void	ft_node_add_back(t_node **stack, t_node *new);
+t_node	*array_to_stack(char **argv, t_node *stack);
+int		build_stack_a(int argc, char **argv, t_node **stack_a);
 
-//assing_ranks.c
-int		assign_ranks(t_stack **stack);
+// //assing_ranks.c
+int		assign_ranks(t_node **stack);
 
-//sort_few.c
-int	sort_four(t_stack **stack);
-int	sort_three(t_stack **stack);
-int		sort_two(t_stack **stack);
-int		count_nodes(t_stack *stack);
-int		sort_few(t_stack **stack);
+// //sort_few.c
+int		get_pos_of_rank(t_node *stack, int rank);
+int	sort_five(t_node **stack_a, t_node **stack_b);
+int		sort_four(t_node **stack_a, t_node **stack_b);
+int		sort_three(t_node **stack_a, t_node **stack_b);
+int		sort_two(t_node **stack);
+int		sort_few(t_node **stack_a, t_node **stack_b);
 
-//operations_wap.c
-void	swap_two(t_stack **stack);
-void	swap_more_than_two(t_stack **stack);
-int		swap(t_stack **stack);
-void	sa(t_stack **stack_a);
-void	sb(t_stack **stack_b);
-void	ss(t_stack **stack_a, t_stack **stack_b);
+// //operations_wap.c
+void	swap_two(t_node **stack);
+void	swap_more_than_two(t_node **stack);
+int		swap(t_node **stack);
+void	sa(t_node **stack_a);
+void	sb(t_node **stack_b);
+void	ss(t_node **stack_a, t_node **stack_b);
 
-//operations_rotate.c
-// void	rotate_two(t_stack **stack);
-int		rotate(t_stack **stack);
-void	ra(t_stack **stack_a);
-void	rb(t_stack **stack_b);
-void	rr(t_stack **stack_a, t_stack **stack_b);
+// //operations_rotate.c
+int		rotate(t_node **stack);
+void	ra(t_node **stack_a);
+void	rb(t_node **stack_b);
+void	rr(t_node **stack_a, t_node **stack_b);
 
-//operations_rev_rotate.c
-int	rev_rotate(t_stack **stack);
-void	rra(t_stack **stack_a);
-void	rrb(t_stack **stack_b);
-void	rrr(t_stack **stack_a, t_stack **stack_b);
+// //operations_rev_rotate.c
+int		rev_rotate(t_node **stack);
+void	rra(t_node **stack_a);
+void	rrb(t_node **stack_b);
+void	rrr(t_node **stack_a, t_node **stack_b);
 
-//operations_push.c
-// int		push(t_stack **stack_srs, t_stack **stack_des);
+// //operations_push.c
+t_node	*detach_from_source(t_node **stack_srs);
+void	attach_to_dest(t_node **stack_des, t_node *node);
 
-
+int		push(t_node **stack_srs, t_node **stack_des);
+void	pa(t_node **stack_a, t_node **stack_b);
+void	pb(t_node **stack_b, t_node **stack_a);
 
 //ft_error.c
 void	print_error_and_exit(const char *message);
 
-//ft_debug.c
-void	print_stacks(t_stack *stack_a, t_stack *stack_b);
+// //ft_debug.c
+void	print_nodes(t_node *stack_a, t_node *stack_b);
 

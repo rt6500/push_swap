@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_ranks.c                                     :+:      :+:    :+:   */
+/*   ft_free_char_array.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 11:05:24 by rseki             #+#    #+#             */
-/*   Updated: 2025/04/15 11:09:36 by rseki            ###   ########.fr       */
+/*   Created: 2025/04/15 15:12:39 by rseki             #+#    #+#             */
+/*   Updated: 2025/04/15 15:28:51 by rseki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-int	assign_ranks(t_node **stack)
+void	ft_free_char_array(char **array, int count)
 {
-	t_node	*cur;
-	t_node	*compare;
-	int		rank;
+	int	i;
 
-	if (!stack || !*stack)
-		return (1);
-	cur = *stack;
-	while (1)
+	if (!array)
+		return ;
+	i = 0;
+	if (count == -1)
 	{
-		rank = 1;
-		compare = *stack;
-		while (1)
-		{
-			if (compare->num < cur->num)
-				rank++;
-			compare = compare->next;
-			if (compare == *stack)
-				break ;
-		}
-		cur->rank = rank;
-		cur = cur->next;
-		if (cur == *stack)
-			break ;
+		while (array[i])
+			free(array[i++]);
 	}
-	return (0);
+	else
+	{
+		while (i < count)
+			free(array[i]);
+	}
+	free(array);
 }

@@ -6,33 +6,75 @@
 /*   By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:24:42 by rseki             #+#    #+#             */
-/*   Updated: 2025/04/15 16:24:43 by rseki            ###   ########.fr       */
+/*   Updated: 2025/04/16 13:48:03 by rseki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// int push(t_stack **stack_srs, t_stack **stack_des)
-// {
-//     // t_node  *des_next;
-//     // t_node  *des_last;
-//     t_node  *srs_next;
-//     t_node  *srs_last;
+t_node	*detach_from_source(t_node **stack_srs)
+{
+	t_node	*top;
 
-//     srs_next = (*stack_srs)->top->next;
-//     srs_last = (*stack_srs)->top->prev;
-//     if ((*stack_des))
-//     (*stack_des)->top = (*stack_srs)->top;
-//     write(1, "asdf\n", 5);
-//     (*stack_srs)->top = srs_next;
+	if (!stack_srs || !*stack_srs)
+		return (NULL);
+	top = *stack_srs;
+	if (top->next == top)
+		*stack_srs = NULL;
+	else
+	{
+		*stack_srs = top->next;
+		(*stack_srs)->prev = top->prev;
+		top->prev->next = *stack_srs;
+		(*stack_srs)->count = top->count - 1;
+	}
+	return (top);
+}
 
-//     // des_last = (*stack_des)->top->prev;
-//     srs_next = (*stack_srs)->top->next;
-//     srs_last = (*stack_srs)->top->prev;
-    
-//     // (*stack_des)->top->next = des_next;
-//     // (*stack_des)->top->next = des_last;
-//     (*stack_srs)->top = srs_next;
-//     (*stack_srs)->top->prev = srs_last;
-//     return (0);
-// }
+void	attach_to_dest(t_node **stack_des, t_node *node)
+{
+	if (!stack_des || !node)
+		return ;
+	if (!*stack_des)
+	{
+	        node->next = node;
+		node->prev = node;
+		node->count = 1;
+		*stack_des = node;
+	        return ;
+	}
+	else
+	{
+        	node->next = *stack_des;
+		node->prev = (*stack_des)->prev;
+		(*stack_des)->prev->next = node;
+		(*stack_des)->prev = node;
+		node->count = (*stack_des)->count + 1;
+		(*stack_des)->count = -1;
+		*stack_des = node;
+	}
+}
+
+int	push(t_node **stack_srs, t_node **stack_des)
+{
+	t_node	*node;
+
+	node = detach_from_source(stack_srs);
+	if (!node)
+		return (1);
+	attach_to_dest(stack_des, node);
+	return (0);
+}
+
+void	pa(t_node **stack_a, t_node **stack_b)
+{
+	if (!push(stack_a, stack_b))
+		printf("pa\n");
+}
+
+void	pb(t_node **stack_b, t_node **stack_a)
+{
+	if (!push(stack_b, stack_a))
+		printf("pb\n");
+}
+

@@ -12,19 +12,19 @@
 
 #include "libft.h"
 
-// static void	ft_free_array(char **array, int count)
-// {
-// 	int	i;
+static void	ft_free_array(char **array, int count)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (i < count)
-// 	{
-// 		if (array[i])
-// 			free(array[i]);
-// 		i++;
-// 	}
-// 	free(array);
-// }
+	i = 0;
+	while (i < count)
+	{
+		if (array[i])
+			free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 static size_t	ft_def_word_len(char const *s, char c)
 {

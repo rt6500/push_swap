@@ -12,14 +12,14 @@
 
 #include "../push_swap.h"
 
-void	print_stacks(t_stack *stack_a, t_stack *stack_b)
+void	print_nodes(t_node *stack_a, t_node *stack_b)
 {
 	t_node	*cur;
     t_node  *start;
 
-	if (stack_a && stack_a->top)
+	if (stack_a)
 	{
-		cur = stack_a->top;
+		cur = stack_a;
         start = cur;
 		ft_printf("stack_a:\n");
 		while (cur)
@@ -31,11 +31,13 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 		}
         ft_printf(" (top)\n");
 	}
-	if (stack_b && stack_b->top)
+	else 
+		ft_printf("stack_a:\nNULL\n");
+	if (stack_b)
 	{
-		cur = stack_b->top;
+		cur = stack_b;
         start = cur;
-		ft_printf("stack:b: \n", stack_b->top->num);
+		ft_printf("stack:b: \n", stack_b->num);
 		while (cur)
 		{
 			ft_printf("%d(%d) -> ", cur->num, cur->rank);
@@ -45,4 +47,6 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 		}
         ft_printf(" (top)\n");
 	}
+	else
+		ft_printf("stack_b:\nNULL\n");
 }

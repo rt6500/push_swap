@@ -51,7 +51,7 @@ int	is_invalid_number(char *str)
 	return (0);
 }
 
-char	**process_two_args(int *count, char **argv)
+char	**process_two_args(char **argv)
 {
 	char	**array;
 	int		i;
@@ -68,11 +68,10 @@ char	**process_two_args(int *count, char **argv)
 	}
 	if (has_duplicate(i, array))
 		return (NULL);
-	*count = i;
 	return (array);
 }
 
-int	process_input(int argc, char **argv)
+int	validate_input(int argc, char **argv)
 {
 	char	**array;
 	int		i;
@@ -82,11 +81,10 @@ int	process_input(int argc, char **argv)
 		return (ft_printf("Error\nUsage: %s num1 num2 ...\n", argv[0]), 1);
 	else if (argc == 2)
 	{
-		array = process_two_args(&argc, argv);
+		array = process_two_args(argv);
 		if (!array)
-			return (ft_printf("Error\nNot number or duplicated\n"), 1);
-		free(array);
-		array = NULL;
+			return (ft_printf("Error\n"), 1);
+		ft_free_char_array(array, -1);
 	}
 	else
 	{
