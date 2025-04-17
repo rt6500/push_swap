@@ -21,7 +21,7 @@ void	print_nodes(t_node *stack_a, t_node *stack_b)
 	{
 		cur = stack_a;
         start = cur;
-		ft_printf("stack_a:\n");
+		ft_printf("\nstack_a:\n[");
 		while (cur)
 		{
 			ft_printf("%d(%d) -> ", cur->num, cur->rank);
@@ -29,15 +29,15 @@ void	print_nodes(t_node *stack_a, t_node *stack_b)
             if (cur == start)
                 break ;
 		}
-        ft_printf(" (top)\n");
+        ft_printf(" (top)]\n");
 	}
 	else 
-		ft_printf("stack_a:\nNULL\n");
+		ft_printf("stack_a:\nNULL\n\n");
 	if (stack_b)
 	{
 		cur = stack_b;
         start = cur;
-		ft_printf("stack:b: \n", stack_b->num);
+		ft_printf("stack:b: \n[", stack_b->num);
 		while (cur)
 		{
 			ft_printf("%d(%d) -> ", cur->num, cur->rank);
@@ -45,8 +45,8 @@ void	print_nodes(t_node *stack_a, t_node *stack_b)
             if (cur == start)
                 break ;
 		}
-        ft_printf(" (top)\n");
+        ft_printf(" (top)]\n\n");
 	}
 	else
-		ft_printf("stack_b:\nNULL\n");
+		ft_printf("stack_b:\nNULL\n\n");
 }

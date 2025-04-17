@@ -20,6 +20,7 @@ int	rev_rotate(t_node **stack)
 	first = *stack;
 	last = first->prev;
 	*stack = last;
+	(*stack)->count = first->count;
 	return (0);
 }
 

@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	assign_ranks(&stack_a);
 	// pa(&stack_a, &stack_b);
 	print_nodes(stack_a, stack_b);
-	sort_few(&stack_a, &stack_b);
+	do_sort(&stack_a, &stack_b);
 	print_nodes(stack_a, stack_b);
 	free_stack(&stack_b);
 	free_stack(&stack_a);
