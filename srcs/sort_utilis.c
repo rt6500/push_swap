@@ -12,6 +12,44 @@
 
 #include "../push_swap.h"
 
+int	check_sorted(t_node *stack)
+{
+	t_node *start;
+	int		cur;
+
+	if(!stack || stack->next == stack)
+		return (1);
+	start = stack;
+	cur = stack->rank;
+	stack = stack->next;
+	while (stack != start)
+	{
+		if (stack->rank < cur)
+			return (0);
+		cur = stack->rank;
+		stack = stack->next;
+	}
+	return (1);
+}
+
+int	get_stack_size(t_node **stack)
+{
+	size_t	i;
+	t_node	*cur;
+
+	if (!*stack)
+		return (0);
+	i = 1;
+	cur = *stack;
+	while (cur->next != *stack)
+	{
+		cur = cur->next;
+		i++;
+	}
+	return (i);
+}
+
+
 int	get_pos_of_rank(t_node *stack, int rank)
 {
 	t_node	*cur;

@@ -29,7 +29,7 @@ void	print_nodes(t_node *stack_a, t_node *stack_b)
             if (cur == start)
                 break ;
 		}
-        ft_printf(" (top)]\n");
+        ft_printf(" (top)]\n\n");
 	}
 	else 
 		ft_printf("stack_a:\nNULL\n\n");

@@ -92,7 +92,7 @@ int	do_sort(t_node **stack_a, t_node **stack_b)
 		sort_four(stack_a, stack_b);
 	else if ((*stack_a)->count == 5)
 		sort_five(stack_a, stack_b);
-	// else if ((*stack_a)->count > 5)
-	// 	sort_more_than_five(stack_a, stack_b);
+	else if ((*stack_a)->count > 5)
+		sort_more_than_five(stack_a, stack_b);
 	return (0);
 }

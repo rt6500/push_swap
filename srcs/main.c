@@ -37,14 +37,16 @@ int	main(int argc, char **argv)
 
 	stack_a = 0;
 	stack_b = 0;
-
 	validate_input(argc, argv);
 	build_stack_a(argc, argv, &stack_a);
 	assign_ranks(&stack_a);
+	// check if stack_a is sorted
+	//	//if not sorted, implement the sorting algorithm.
 	// pa(&stack_a, &stack_b);
+	ft_printf("\nAFTER ASSIGN_RANKS\n");
 	print_nodes(stack_a, stack_b);
 	do_sort(&stack_a, &stack_b);
-	print_nodes(stack_a, stack_b);
+	// print_nodes(stack_a, stack_b);
 	free_stack(&stack_b);
 	free_stack(&stack_a);
 	return (0);
