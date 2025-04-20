@@ -51,7 +51,7 @@ int	sort_four(t_node **stack_a, t_node **stack_b)
 
 int	sort_three(t_node **stack_a, t_node **stack_b)
 {
-	int r[3];
+	int	r[3];
 
 	get_normalized_ranks(stack_a, stack_b, r);
 	if (r[0] < r[2] && r[2] < r[1])
@@ -80,19 +80,98 @@ int	sort_two(t_node **stack)
 	return (0);
 }
 
+int	get_max_bits(t_node *stack)
+{
+	int	max;
+	int	bits;
+
+	max = stack->count;
+	bits = 0;
+	while ((max >> bits) != 0)
+		bits++;
+	return (bits);
+}
+
+void	sort_one_bit(t_node **a, t_node **b, int bit)
+{
+	int	size;
+	int	i;
+	int	num;
+	int	bit_val;
+
+	size = (*a)->count;
+	i = 0;
+	while (i < size)
+	{
+		num = (*a)->rank;
+		bit_val = (num >> bit) & 1;
+		ft_printf("bit %d of %d is %d\n", bit, num, bit_val);
+		if (((num >> bit) & 1) == 0)
+			pb(a, b);
+		else
+			ra(a);
+		print_nodes(*a, *b);
+		i++;
+	}
+}
+
+void	binary_radix_sort(t_node **a, t_node **b)
+{
+	int	i;
+	int	bits;
+	int	b_size;
+
+	bits = get_max_bits(*a);
+	ft_printf("bits: %d\n", bits);
+	i = 0;
+	while (i < bits)
+	{
+		sort_one_bit(a, b, i);
+		b_size = (*b)->count;
+		while (b_size > 0)
+		{
+			pa(a, b);
+			b_size--;
+		}
+		i++;
+	}
+}
+
+int	is_sorted(t_node *stack)
+{
+	t_node	*start;
+
+	start = stack;
+	if (!stack || !stack->next)
+		return (1);
+	while ((start != stack->next))
+	{
+		if (stack->next->rank < stack->rank)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
 int	do_sort(t_node **stack_a, t_node **stack_b)
 {
+	int	max_rank;
+
+	max_rank = (*stack_a)->count;
 	if ((*stack_a)->count <= 1)
 		return (1);
-	else if ((*stack_a)->count == 2)
-		sort_two(stack_a);
-	else if ((*stack_a)->count == 3)
-		sort_three(stack_a, stack_b);
-	else if ((*stack_a)->count == 4)
-		sort_four(stack_a, stack_b);
-	else if ((*stack_a)->count == 5)
-		sort_five(stack_a, stack_b);
-	else if ((*stack_a)->count > 5)
-		sort_more_than_five(stack_a, stack_b);
+	if (is_sorted(*stack_a))
+		return (1);
+	// if ((*stack_a)->count == 2)
+	// 	sort_two(stack_a);
+	// else if ((*stack_a)->count == 3)
+	// 	sort_three(stack_a, stack_b);
+	// else if ((*stack_a)->count == 4)
+	// 	sort_four(stack_a, stack_b);
+	// else if ((*stack_a)->count == 5)
+	// 	sort_five(stack_a, stack_b);
+	// else if ((*stack_a)->count > 5)
+	// 	binary_radix_sort(stack_a, stack_b);
+	binary_radix_sort(stack_a, stack_b);
 	return (0);
 }

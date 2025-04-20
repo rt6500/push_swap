@@ -93,9 +93,9 @@ int					do_sort(t_node **stack_a, t_node **stack_b);
 // sort_five.c
 int					sort_five(t_node **stack_a, t_node **stack_b);
 
-// sort_more_than_five.c
-void				sort_push_to_b_till_3(t_node **stack_a, t_node **stack_b);
-int					sort_more_than_five(t_node **stack_a, t_node **stack_b);
+// // sort_more_than_five.c
+// void				sort_push_to_b_till_3(t_node **stack_a, t_node **stack_b);
+// int					sort_more_than_five(t_node **stack_a, t_node **stack_b);
 
 // sort_utilis.c
 int					check_sorted(t_node *stack);
