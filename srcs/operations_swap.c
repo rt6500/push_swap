@@ -50,7 +50,7 @@ int	swap(t_node **stack)
 {
 	if (!stack || !(*stack) || !(*stack)->next)
 		return (1);
-	if ((*stack)->count == 2)
+	if (get_stack_size(*stack) == 2)
 		swap_two(stack);
 	else
 		swap_more_than_two(stack);

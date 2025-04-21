@@ -15,38 +15,38 @@
 void	print_nodes(t_node *stack_a, t_node *stack_b)
 {
 	t_node	*cur;
-    t_node  *start;
+	t_node	*start;
 
 	if (stack_a)
 	{
 		cur = stack_a;
-        start = cur;
-		ft_printf("\nstack_a:\n[");
+		start = cur;
+		ft_printf("\nstack_a:[");
 		while (cur)
 		{
 			ft_printf("%d(%d) -> ", cur->num, cur->rank);
 			cur = cur->next;
-            if (cur == start)
-                break ;
+			if (cur == start)
+				break ;
 		}
-        ft_printf(" (top)]\n\n");
+		ft_printf(" (top)]\n");
 	}
-	else 
-		ft_printf("stack_a:\nNULL\n\n");
+	else
+		ft_printf("stack_a:NULL\n");
 	if (stack_b)
 	{
 		cur = stack_b;
-        start = cur;
-		ft_printf("stack:b: \n[", stack_b->num);
+		start = cur;
+		ft_printf("stack:b: [", stack_b->num);
 		while (cur)
 		{
 			ft_printf("%d(%d) -> ", cur->num, cur->rank);
-			cur = cur -> next;
-            if (cur == start)
-                break ;
+			cur = cur->next;
+			if (cur == start)
+				break ;
 		}
-        ft_printf(" (top)]\n\n");
+		ft_printf(" (top)]\n");
 	}
 	else
-		ft_printf("stack_b:\nNULL\n\n");
+		ft_printf("stack_b:NULL\n");
 }

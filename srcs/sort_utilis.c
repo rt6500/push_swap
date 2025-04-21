@@ -14,10 +14,10 @@
 
 int	check_sorted(t_node *stack)
 {
-	t_node *start;
+	t_node	*start;
 	int		cur;
 
-	if(!stack || stack->next == stack)
+	if (!stack || stack->next == stack)
 		return (1);
 	start = stack;
 	cur = stack->rank;
@@ -32,23 +32,27 @@ int	check_sorted(t_node *stack)
 	return (1);
 }
 
-int	get_stack_size(t_node **stack)
+int	get_stack_size(t_node *stack)
 {
 	size_t	i;
 	t_node	*cur;
 
-	if (!*stack)
+	if (!stack)
 		return (0);
 	i = 1;
-	cur = *stack;
-	while (cur->next != *stack)
+	cur = stack;
+	while (cur->next && cur->next != stack)
 	{
 		cur = cur->next;
 		i++;
+		if (i > 10000)
+		{
+			ft_printf("list corrupted\n");
+			break ;
+		}
 	}
 	return (i);
 }
-
 
 int	get_pos_of_rank(t_node *stack, int rank)
 {
@@ -73,23 +77,23 @@ int	get_pos_of_rank(t_node *stack, int rank)
 
 int	find_min(t_node *stack)
 {
-	int	min;
+	int		min;
 	t_node	*cur;
 
 	min = stack->num;
 	cur = stack;
 	while (cur->next != stack)
 	{
-	if (stack->num < min)
-		min = stack->num;
-	stack = stack->next;
+		if (stack->num < min)
+			min = stack->num;
+		stack = stack->next;
 	}
 	return (min);
 }
 
 int	find_max(t_node *stack)
 {
-	int	max;
+	int		max;
 	t_node	*cur;
 
 	max = stack->num;
@@ -97,8 +101,24 @@ int	find_max(t_node *stack)
 	while (cur->next != stack)
 	{
 		if (max < stack->num)
-		max = stack->num;
+			max = stack->num;
 		stack = stack->next;
 	}
 	return (max);
+}
+
+int	is_sorted(t_node *stack)
+{
+	t_node *start;
+
+	start = stack;
+	if (!stack || !stack->next)
+		return (1);
+	while ((start != stack->next))
+	{
+		if (stack->next->rank < stack->rank)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }

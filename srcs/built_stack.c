@@ -30,7 +30,7 @@ t_node	*array_to_stack(char **argv, t_node *stack)
 	}
 	if (!stack)
 		write(1, "stack is NULL\n", 15);
-	free(array);
+	ft_free_char_array(array, -1);
 	return (stack);
 }
 
@@ -45,17 +45,13 @@ void	ft_node_add_back(t_node **stack, t_node *new)
 		*stack = new;
 		new->next = new;
 		new->prev = new;
-		new->count = 1;
 		return ;
 	}
 	last = (*stack)->prev;
 	last->next = new;
 	new->prev = last;
 	new->next = *stack;
-	new->count = 2;
 	(*stack)->prev = new;
-	new->count = -1;
-	(*stack)->count += 1;
 }
 
 t_node	*ft_node_new(long num)

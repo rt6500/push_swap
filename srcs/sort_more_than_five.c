@@ -12,6 +12,68 @@
 
 #include "../push_swap.h"
 
+int	get_max_bits(t_node *stack)
+{
+	int		max;
+	int		bits;
+	t_node	*cur;
+
+	if (!stack)
+		return (0);
+	max = stack->rank;
+	cur = stack->next;
+	while (cur != stack)
+	{
+		if (max < cur->rank)
+			max = cur->rank;
+		cur = cur->next;
+	}
+	bits = 0;
+	while ((max >> bits) != 0)
+		bits++;
+	return (bits);
+}
+
+void	sort_one_bit(t_node **a, t_node **b, int bit)
+{
+	int	size;
+	int	i;
+	int	num;
+	int	bit_val;
+
+	i = 0;
+	size = get_stack_size(*a);
+	while (i < size)
+	{
+		num = (*a)->rank;
+		bit_val = (num >> bit) & 1;
+		// ft_printf("bit %d of %d is %d\n", bit, num, bit_val);
+		if (((num >> bit) & 1) == 0)
+			pb(a, b);
+		else
+			ra(a);
+		// print_nodes(*a, *b);
+		i++;
+	}
+}
+
+void	binary_radix_sort(t_node **a, t_node **b)
+{
+	int	i;
+	int	bits;
+
+	bits = get_max_bits(*a);
+	// ft_printf("bits: %d\n", bits);
+	i = 0;
+	while (i < bits)
+	{
+		sort_one_bit(a, b, i);
+		while (get_stack_size(*b) > 0)
+			pa(a, b);
+		i++;
+	}
+}
+
 // int	is_all_smaller(t_node *stack_b, int value)
 // {
 // 	t_node	*cur;

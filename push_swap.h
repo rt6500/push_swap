@@ -25,7 +25,6 @@ typedef struct s_node
 	int				rank;
 	struct s_node	*prev;
 	struct s_node	*next;
-	int				count;
 }					t_node;
 
 // main.c
@@ -92,14 +91,16 @@ int					do_sort(t_node **stack_a, t_node **stack_b);
 
 // sort_five.c
 int					sort_five(t_node **stack_a, t_node **stack_b);
+void				sort_one_bit(t_node **a, t_node **b, int bit);
+int					get_max_bits(t_node *stack);
 
 // // sort_more_than_five.c
-// void				sort_push_to_b_till_3(t_node **stack_a, t_node **stack_b);
-// int					sort_more_than_five(t_node **stack_a, t_node **stack_b);
+void				binary_radix_sort(t_node **a, t_node **b);
 
 // sort_utilis.c
 int					check_sorted(t_node *stack);
-int					get_stack_size(t_node **stack);
+int					get_stack_size(t_node *stack);
 int					get_pos_of_rank(t_node *stack, int rank);
 int					find_min(t_node *stack);
 int					find_max(t_node *stack);
+int					is_sorted(t_node *stack);
