@@ -56,13 +56,6 @@ void	sort_one_trit(t_node **a, t_node **b, int trit)
 	while (i++ < size)
 	{
 		d = get_trit((*a)->rank, trit);
-		// if (get_stack_size(*b) > 1)
-		// {
-		// 	d_top_b = get_trit((*b)->rank, trit);
-		// 	if (d == 0 && d_top_b == 0)
-		// 		pb(a, b);
-		// }
-		// else if (d == 0)
 		if (d == 0)
 		{
 			pb(a, b);
@@ -75,43 +68,19 @@ void	sort_one_trit(t_node **a, t_node **b, int trit)
 	}
 }
 
-// void	push_back_one_trit(t_node **a, t_node **b, int trit)
-// {
-// 	int	i;
-// 	int	size;
-// 	int	d;
-
-// 	i = 0;
-// 	size = get_stack_size(*b);
-// 	while (i++ < size)
-// 	{
-// 		d = get_trit((*b)->rank, trit);
-// 		if (d == 0 || d == 2)
-// 		{
-// 			pa(a, b);
-// 			if (d == 2)
-// 				ra(a);
-// 		}
-// 		else
-// 			rb(b);
-// 	}
-// }
-
 int	ternary_radix_sort(t_node **a, t_node **b)
 {
-	int i;
 	int max_digits;
 
-	i = 0;
 	max_digits = get_max_digit_ternary(*a);
-	ft_printf("max_digits: %d\n", max_digits);
+	// ft_printf("max_digits: %d\n", max_digits);
 	// ft_printf("bits: %d\n", bits);
-	while (i < max_digits)
+	while (0 <= max_digits)
 	{
 		// print_nodes(*a, *b);
 		while (get_stack_size(*b) > 0)
 			pa(a, b);
-		sort_one_trit(a, b, i);
+		sort_one_trit(a, b, max_digits);
 		// ft_printf("after sort_one_trit:\n");
 		// print_nodes(*a, *b);
 		// push_back_one_trit(a, b, i);
@@ -119,7 +88,7 @@ int	ternary_radix_sort(t_node **a, t_node **b)
 			pa(a, b);
 		// ft_printf("after pushing back:\n");
 		// print_nodes(*a, *b);
-		i++;
+		max_digits--;
 	}
 	return (0);
 }
