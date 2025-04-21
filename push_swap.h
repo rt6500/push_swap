@@ -94,8 +94,17 @@ int					sort_five(t_node **stack_a, t_node **stack_b);
 void				sort_one_bit(t_node **a, t_node **b, int bit);
 int					get_max_bits(t_node *stack);
 
-// // sort_more_than_five.c
+// // binary_radix_sort.c
+int					get_max_digit(t_node *stack);
+void				sort_one_bit(t_node **a, t_node **b, int bit);
 void				binary_radix_sort(t_node **a, t_node **b);
+
+// ternary_radix_sort.c
+int					get_trit(int rank, int pos);
+int					get_max_digit_ternary(t_node *stack);
+void				sort_one_trit(t_node **a, t_node **b, int trit);
+void				push_back_one_trit(t_node **a, t_node **b, int trit);
+int					ternary_radix_sort(t_node **a, t_node **b);
 
 // sort_utilis.c
 int					check_sorted(t_node *stack);

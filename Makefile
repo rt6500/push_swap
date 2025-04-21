@@ -2,6 +2,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L./libft -L./libft/srcs/printf -L./libft/srcs/gnl
 
+
+
 #Directory for OBJECTS
 OBJDIR = objs
 
@@ -17,9 +19,18 @@ LIBFT = $(LIBFT_PATH)/libft.a
 #The output of the executable
 EXEC = $(NAME)
 
-#Object files for solong
+#Object files
 SOURCES = $(wildcard srcs/*.c)
 SOURCES := $(filter-out srcs/test.c, $(SOURCES))
+
+ifeq ($(ALG),1)
+SOURCES := $(filter-out srcs/ternary_radix_sort.c, $(SOURCES))
+endif
+
+ifeq ($(ALG),2)
+SOURCES := $(filter-out srcs/binary_radix_sort.c, $(SOURCES))
+endif
+
 
 #Store object files in objs
 OBJECTS = $(patsubst srcs/%.c, $(OBJDIR)/%.o, $(SOURCES))

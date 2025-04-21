@@ -99,7 +99,9 @@ int	do_sort(t_node **stack_a, t_node **stack_b)
 		sort_four(stack_a, stack_b);
 	else if (size == 5)
 		sort_five(stack_a, stack_b);
+	// else if (size > 5)
+	// 	binary_radix_sort(stack_a, stack_b);
 	else if (size > 5)
-		binary_radix_sort(stack_a, stack_b);
+		ternary_radix_sort(stack_a, stack_b);
 	return (0);
 }

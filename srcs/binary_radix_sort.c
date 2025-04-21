@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_more_than_five.c                              :+:      :+:    :+:   */
+/*   binary_radix_sort.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,10 @@
 
 #include "../push_swap.h"
 
-int	get_max_bits(t_node *stack)
+int	get_max_digit(t_node *stack)
 {
 	int		max;
-	int		bits;
+	int		digit;
 	t_node	*cur;
 
 	if (!stack)
@@ -28,10 +28,10 @@ int	get_max_bits(t_node *stack)
 			max = cur->rank;
 		cur = cur->next;
 	}
-	bits = 0;
-	while ((max >> bits) != 0)
-		bits++;
-	return (bits);
+	digit = 0;
+	while ((max >> digit) != 0)
+		digit++;
+	return (digit);
 }
 
 void	sort_one_bit(t_node **a, t_node **b, int bit)
@@ -62,7 +62,7 @@ void	binary_radix_sort(t_node **a, t_node **b)
 	int	i;
 	int	bits;
 
-	bits = get_max_bits(*a);
+	bits = get_max_digit(*a);
 	// ft_printf("bits: %d\n", bits);
 	i = 0;
 	while (i < bits)
