@@ -6,7 +6,7 @@
 /*   By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 08:30:24 by rseki             #+#    #+#             */
-/*   Updated: 2025/04/17 14:52:57 by rseki            ###   ########.fr       */
+/*   Updated: 2025/04/22 13:30:31 by rseki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	get_pos_of_rank(t_node *stack, int rank)
 	if (!stack)
 		return (-1);
 	cur = stack;
-	pos = 1;
+	pos = 0;
 	while (cur->next != stack)
 	{
 		if (cur->rank == rank)
@@ -75,41 +75,9 @@ int	get_pos_of_rank(t_node *stack, int rank)
 	return (-1);
 }
 
-int	find_min(t_node *stack)
-{
-	int		min;
-	t_node	*cur;
-
-	min = stack->num;
-	cur = stack;
-	while (cur->next != stack)
-	{
-		if (stack->num < min)
-			min = stack->num;
-		stack = stack->next;
-	}
-	return (min);
-}
-
-int	find_max(t_node *stack)
-{
-	int		max;
-	t_node	*cur;
-
-	max = stack->num;
-	cur = stack;
-	while (cur->next != stack)
-	{
-		if (max < stack->num)
-			max = stack->num;
-		stack = stack->next;
-	}
-	return (max);
-}
-
 int	is_sorted(t_node *stack)
 {
-	t_node *start;
+	t_node	*start;
 
 	start = stack;
 	if (!stack || !stack->next)
@@ -121,4 +89,33 @@ int	is_sorted(t_node *stack)
 		stack = stack->next;
 	}
 	return (1);
+}
+
+int	assign_ranks(t_node **stack)
+{
+	t_node	*cur;
+	t_node	*compare;
+	int		rank;
+
+	if (!stack || !*stack)
+		return (1);
+	cur = *stack;
+	while (1)
+	{
+		rank = 0;
+		compare = *stack;
+		while (1)
+		{
+			if (compare->num < cur->num)
+				rank++;
+			compare = compare->next;
+			if (compare == *stack)
+				break ;
+		}
+		cur->rank = rank;
+		cur = cur->next;
+		if (cur == *stack)
+			break ;
+	}
+	return (0);
 }

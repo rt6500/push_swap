@@ -1,42 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_ranks.c                                     :+:      :+:    :+:   */
+/*   operation_swap_utilis.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 11:05:24 by rseki             #+#    #+#             */
-/*   Updated: 2025/04/15 11:09:36 by rseki            ###   ########.fr       */
+/*   Created: 2025/04/22 13:19:00 by rseki             #+#    #+#             */
+/*   Updated: 2025/04/22 13:19:01 by rseki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	assign_ranks(t_node **stack)
+void	ss(t_node **stack_a, t_node **stack_b)
 {
-	t_node	*cur;
-	t_node	*compare;
-	int		rank;
-
-	if (!stack || !*stack)
-		return (1);
-	cur = *stack;
-	while (1)
-	{
-		rank = 1;
-		compare = *stack;
-		while (1)
-		{
-			if (compare->num < cur->num)
-				rank++;
-			compare = compare->next;
-			if (compare == *stack)
-				break ;
-		}
-		cur->rank = rank;
-		cur = cur->next;
-		if (cur == *stack)
-			break ;
-	}
-	return (0);
+	if (!swap(stack_a) && !swap(stack_b))
+		printf("ss\n");
 }

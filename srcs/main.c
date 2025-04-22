@@ -42,9 +42,7 @@ int	main(int argc, char **argv)
 	if (build_stack_a(argc, argv, &stack_a))
 		return (0);
 	assign_ranks(&stack_a);
-	// print_nodes(stack_a, stack_b);
 	do_sort(&stack_a, &stack_b);
-	// print_nodes(stack_a, stack_b);
 	free_stack(&stack_b);
 	free_stack(&stack_a);
 	return (0);

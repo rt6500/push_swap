@@ -29,23 +29,27 @@ int	sort_four(t_node **stack_a, t_node **stack_b)
 {
 	int	pos;
 
-	pos = get_pos_of_rank(*stack_a, 1);
-	ft_printf("pos: %d\n", pos);
-	if (pos == 1)
+	pos = get_pos_of_rank(*stack_a, 0);
+	if (pos == 0)
 		pb(stack_a, stack_b);
-	else if (pos == 2)
+	else if (pos == 1)
 	{
 		sa(stack_a);
+		pb(stack_a, stack_b);
+	}
+	else if (pos == 2)
+	{
+		rra(stack_a);
+		rra(stack_a);
 		pb(stack_a, stack_b);
 	}
 	else if (pos == 3)
 	{
 		rra(stack_a);
-		rra(stack_a);
 		pb(stack_a, stack_b);
 	}
 	sort_three(stack_a, stack_b);
-	pa(stack_b, stack_a);
+	pa(stack_a, stack_b);
 	return (0);
 }
 
@@ -67,8 +71,8 @@ int	sort_three(t_node **stack_a, t_node **stack_b)
 		ra(stack_a);
 	else if (r[2] < r[1] && r[1] < r[0])
 	{
-		ra(stack_a);
 		sa(stack_a);
+		rra(stack_a);
 	}
 	return (0);
 }
@@ -99,9 +103,7 @@ int	do_sort(t_node **stack_a, t_node **stack_b)
 		sort_four(stack_a, stack_b);
 	else if (size == 5)
 		sort_five(stack_a, stack_b);
-	// else if (size > 5)
-	// 	binary_radix_sort(stack_a, stack_b);
 	else if (size > 5)
-		ternary_radix_sort(stack_a, stack_b);
+		binary_radix_sort(stack_a, stack_b);
 	return (0);
 }

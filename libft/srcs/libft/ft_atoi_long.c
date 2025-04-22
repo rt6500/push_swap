@@ -6,7 +6,7 @@
 /*   By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:27:56 by rseki             #+#    #+#             */
-/*   Updated: 2025/04/10 15:14:25 by rseki            ###   ########.fr       */
+/*   Updated: 2025/04/22 13:25:52 by rseki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	parse_sign_and_skip(char **str_ptr)
 
 	sign = 1;
 	str = *str_ptr;
-	while (*str == '\n' || *str == '\t' || *str == '\r' || \
-	*str == '\f' || *str == '\v' || *str == ' ')
+	while (*str == '\n' || *str == '\t' || *str == '\r' || *str == '\f'
+		|| *str == '\v' || *str == ' ')
 		str++;
 	if (*str == '-' || *str == '+')
 	{
@@ -37,13 +37,13 @@ static int	parse_sign_and_skip(char **str_ptr)
 
 int	ft_atoi_long(const char *str)
 {
-	int		sign;
+	int			sign;
 	long long	result;
-	char	*ptr;
+	char		*ptr;
 
 	result = 0;
 	sign = parse_sign_and_skip(&ptr);
-	ptr = (char *) str;
+	ptr = (char *)str;
 	while (*ptr)
 	{
 		if (sign == 1)
@@ -53,8 +53,8 @@ int	ft_atoi_long(const char *str)
 		}
 		else
 		{
-			if (result > -(LONG_MIN / 10) || (result == -(LONG_MIN / 10) && \
-				(*ptr - '0') > - (LONG_MIN % 10)))
+			if (result > -(LONG_MIN / 10) || (result == -(LONG_MIN / 10)
+					&& (*ptr - '0') > -(LONG_MIN % 10)))
 				return (UNDERFLOW_ERROR);
 		}
 		result = result * 10 + *ptr - '0';
@@ -62,16 +62,3 @@ int	ft_atoi_long(const char *str)
 	}
 	return (result * sign);
 }
-
-// #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-// int main(void)
-// {
-//     char *str1 = "-9223372036854775809";
-//     // char *str2 = "123";
-//     printf("LONG_MIN = %ld\n", LONG_MIN);
-//     printf("LONG_MAX = %ld\n", LONG_MAX);
-//     printf("ft_atoi_long: %ld\n", ft_atoi_long(str1));
-//     return (0);
-// }

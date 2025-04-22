@@ -6,7 +6,7 @@
 /*   By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 14:10:52 by rseki             #+#    #+#             */
-/*   Updated: 2024/05/19 12:18:11 by rseki            ###   ########.fr       */
+/*   Updated: 2025/04/22 13:24:18 by rseki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	**ft_split_copy(char const *s, char c, char **array)
 			array[i] = ft_substr(s, 0, word_len);
 			if (!array[i])
 			{
-				ft_free_array((void*)array, i);
+				ft_free_array((void *)array, i);
 				return (NULL);
 			}
 			i++;
@@ -77,7 +77,7 @@ static size_t	ft_countword(char const *s, char c)
 			s++;
 		if (*s)
 			count++;
-		while (*s && *s!= c)
+		while (*s && *s != c)
 			s++;
 	}
 	return (count);

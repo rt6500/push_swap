@@ -13,11 +13,9 @@
 #include "libft/libft.h"
 #include "libft/srcs/gnl/get_next_line.h"
 #include "libft/srcs/printf/ft_printf.h"
-#include <limits.h> //LONG_MIN LONG_MAX
-#include <stdbool.h>
-#include <stdio.h>  //printf
-#include <stdlib.h> //malloc
-#include <unistd.h> //write
+#include <limits.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 typedef struct s_node
 {
@@ -26,6 +24,19 @@ typedef struct s_node
 	struct s_node	*prev;
 	struct s_node	*next;
 }					t_node;
+
+//* delete */////////////////////////////////////////////////////
+// //ft_debug.c
+void				print_nodes(t_node *stack_a, t_node *stack_b);
+// ternary_radix_sort.c
+int					get_trit(int rank, int pos);
+int					get_max_digit_ternary(t_node *stack);
+void				sort_one_trit(t_node **a, t_node **b, int trit);
+void				push_back_one_trit(t_node **a, t_node **b, int trit);
+int					ternary_radix_sort(t_node **a, t_node **b);
+// ft_error.c
+void				print_error_and_exit(const char *message);
+////////////////////////////////////////////////////////////
 
 // main.c
 int					main(int argc, char **argv);
@@ -46,15 +57,14 @@ void				ft_node_add_back(t_node **stack, t_node *new);
 t_node				*array_to_stack(char **argv, t_node *stack);
 int					build_stack_a(int argc, char **argv, t_node **stack_a);
 
-// //assing_ranks.c
-int					assign_ranks(t_node **stack);
-
-// //operations_wap.c
+// operations_swap.c
 void				swap_two(t_node **stack);
 void				swap_more_than_two(t_node **stack);
 int					swap(t_node **stack);
 void				sa(t_node **stack_a);
 void				sb(t_node **stack_b);
+
+// //operations_swap_utilis.c
 void				ss(t_node **stack_a, t_node **stack_b);
 
 // //operations_rotate.c
@@ -72,16 +82,9 @@ void				rrr(t_node **stack_a, t_node **stack_b);
 // //operations_push.c
 t_node				*detach_from_source(t_node **stack_srs);
 void				attach_to_dest(t_node **stack_des, t_node *node);
-
 int					push(t_node **stack_srs, t_node **stack_des);
 void				pa(t_node **stack_a, t_node **stack_b);
 void				pb(t_node **stack_b, t_node **stack_a);
-
-// ft_error.c
-void				print_error_and_exit(const char *message);
-
-// //ft_debug.c
-void				print_nodes(t_node *stack_a, t_node *stack_b);
 
 // //sort_few.c
 int					sort_four(t_node **stack_a, t_node **stack_b);
@@ -91,25 +94,15 @@ int					do_sort(t_node **stack_a, t_node **stack_b);
 
 // sort_five.c
 int					sort_five(t_node **stack_a, t_node **stack_b);
-void				sort_one_bit(t_node **a, t_node **b, int bit);
-int					get_max_bits(t_node *stack);
 
 // // binary_radix_sort.c
 int					get_max_digit(t_node *stack);
 void				sort_one_bit(t_node **a, t_node **b, int bit);
 void				binary_radix_sort(t_node **a, t_node **b);
 
-// ternary_radix_sort.c
-int					get_trit(int rank, int pos);
-int					get_max_digit_ternary(t_node *stack);
-void				sort_one_trit(t_node **a, t_node **b, int trit);
-void				push_back_one_trit(t_node **a, t_node **b, int trit);
-int					ternary_radix_sort(t_node **a, t_node **b);
-
 // sort_utilis.c
 int					check_sorted(t_node *stack);
 int					get_stack_size(t_node *stack);
 int					get_pos_of_rank(t_node *stack, int rank);
-int					find_min(t_node *stack);
-int					find_max(t_node *stack);
 int					is_sorted(t_node *stack);
+int					assign_ranks(t_node **stack);

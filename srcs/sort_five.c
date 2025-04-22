@@ -12,45 +12,22 @@
 
 #include "../push_swap.h"
 
-static int	is_top_rank_1_or_2(t_node *stack)
-{
-	return (stack->rank == 1 || stack->rank == 2);
-}
-
-static void	rotate_to_top(t_node **stack_a, int target_rank)
+static void	push_two_to_b(t_node **a, t_node **b)
 {
 	int	pos;
 
-	pos = get_pos_of_rank(*stack_a, target_rank);
-	if (pos == 1)
-		return ;
-	if (pos <= get_stack_size(*stack_a) / 2)
-		ra(stack_a);
-	else
-		rra(stack_a);
-}
-
-static void	push_two_to_b(t_node **stack_a, t_node **stack_b)
-{
-	int	pos_1;
-	int	pos_2;
-
-	while (get_stack_size(*stack_a) > 3)
+	while (get_stack_size(*a) > 3)
 	{
-		if (is_top_rank_1_or_2(*stack_a))
-			pb(stack_a, stack_b);
-		else
+		pos = get_pos_of_rank(*a, 0);
+		while ((*a)->rank != 0 && (*a)->rank != 1)
 		{
-			pos_1 = get_pos_of_rank(*stack_a, 1);
-			pos_2 = get_pos_of_rank(*stack_a, 2);
-			if (pos_1 > 0)
-				rotate_to_top(stack_a, 1);
-			else if (pos_2 > 0)
-				rotate_to_top(stack_a, 2);
+			pos = get_pos_of_rank(*a, 0);
+			if (pos <= get_stack_size(*a) / 2)
+				ra(a);
 			else
-				break ;
-			// print_nodes(*stack_a, *stack_b);
+				rra(a);
 		}
+		pb(a, b);
 	}
 }
 

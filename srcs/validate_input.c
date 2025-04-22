@@ -78,7 +78,7 @@ int	validate_input(int argc, char **argv)
 
 	i = 1;
 	if (argc < 2)
-		return (ft_printf("Error\nUsage: %s num1 num2 ...\n", argv[0]), 1);
+		return (1);
 	else if (argc == 2)
 	{
 		array = process_two_args(argv);

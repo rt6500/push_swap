@@ -19,8 +19,8 @@ int	ft_atoi_ps(const char *str)
 
 	sign = 1;
 	result = 0;
-	while (*str == '\n' || *str == '\t' || *str == '\r' || \
-*str == '\f' || *str == '\v' || *str == ' ')
+	while (*str == '\n' || *str == '\t' || *str == '\r' || *str == '\f'
+		|| *str == '\v' || *str == ' ')
 		str++;
 	if (*str == '-' || *str == '+')
 	{
@@ -34,6 +34,9 @@ int	ft_atoi_ps(const char *str)
 		str++;
 	}
 	if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
-		print_error_and_exit("Invalid input: must be an integer\n");
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
 	return ((int)(result * sign));
 }
