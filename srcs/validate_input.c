@@ -51,6 +51,16 @@ int	is_invalid_number(char *str)
 	return (0);
 }
 
+int	is_one_elememt(char **array)
+{
+	if (!array[1])
+	{
+		ft_free_char_array(array, -1);
+		return (1);
+	}
+	return (0);
+}
+
 char	**process_two_args(char **argv)
 {
 	char	**array;
@@ -60,14 +70,16 @@ char	**process_two_args(char **argv)
 	array = ft_split(argv[1], ' ');
 	if (!array)
 		return (NULL);
+	if (is_one_elememt(array))
+		return (NULL);
 	while (array[i])
 	{
 		if (is_invalid_number(array[i]))
-			return (NULL);
+			return (ft_free_char_array(array, -1), NULL);
 		i++;
 	}
 	if (has_duplicate(i, array))
-		return (NULL);
+		return (ft_free_char_array(array, -1), NULL);
 	return (array);
 }
 
