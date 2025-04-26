@@ -1,8 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rseki <rseki@student.42tokyo.jp>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/04/26 15:59:14 by rseki             #+#    #+#              #
+#    Updated: 2025/04/26 15:59:16 by rseki            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L./libft -L./libft/srcs/printf -L./libft/srcs/gnl
-
-
 
 #Directory for OBJECTS
 OBJDIR = objs
@@ -20,17 +30,10 @@ LIBFT = $(LIBFT_PATH)/libft.a
 EXEC = $(NAME)
 
 #Object files
-SOURCES = $(wildcard srcs/*.c)
-SOURCES := $(filter-out srcs/test.c, $(SOURCES))
-
-ifeq ($(ALG),1)
-SOURCES := $(filter-out srcs/ternary_radix_sort.c, $(SOURCES))
-endif
-
-ifeq ($(ALG),2)
-SOURCES := $(filter-out srcs/binary_radix_sort.c, $(SOURCES))
-endif
-
+SOURCES = srcs/binary_radix_sort.c srcs/ft_atoi_ps.c srcs/operations_rotate.c \
+srcs/sort_five.c srcs/built_stack.c srcs/main.c srcs/operations_swap.c \
+srcs/sort_utilis.c srcs/operations_push.c srcs/operation_swap_utilis.c \
+srcs/operations_rev_rotate.c  srcs/sort_few.c srcs/validate_input.c
 
 #Store object files in objs
 OBJECTS = $(patsubst srcs/%.c, $(OBJDIR)/%.o, $(SOURCES))

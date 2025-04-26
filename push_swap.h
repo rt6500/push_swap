@@ -25,6 +25,8 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
+void	print_nodes(t_node *stack_a, t_node *stack_b);
+
 // main.c
 int					main(int argc, char **argv);
 void				free_stack(t_node **stack);
