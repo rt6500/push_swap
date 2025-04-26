@@ -60,11 +60,11 @@ int	swap(t_node **stack)
 void	sa(t_node **stack_a)
 {
 	if (!swap(stack_a))
-		printf("sa\n");
+		ft_printf("sa\n");
 }
 
 void	sb(t_node **stack_b)
 {
 	if (!swap(stack_b))
-		printf("sb\n");
+		ft_printf("sb\n");
 }

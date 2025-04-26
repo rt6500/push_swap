@@ -45,11 +45,6 @@ int	get_stack_size(t_node *stack)
 	{
 		cur = cur->next;
 		i++;
-		if (i > 10000)
-		{
-			ft_printf("list corrupted\n");
-			break ;
-		}
 	}
 	return (i);
 }

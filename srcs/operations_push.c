@@ -67,11 +67,11 @@ int	push(t_node **stack_srs, t_node **stack_des)
 void	pa(t_node **stack_a, t_node **stack_b)
 {
 	if (!push(stack_b, stack_a))
-		printf("pa\n");
+		ft_printf("pa\n");
 }
 
 void	pb(t_node **stack_a, t_node **stack_b)
 {
 	if (!push(stack_a, stack_b))
-		printf("pb\n");
+		ft_printf("pb\n");
 }

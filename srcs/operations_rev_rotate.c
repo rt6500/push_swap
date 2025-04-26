@@ -26,17 +26,17 @@ int	rev_rotate(t_node **stack)
 void	rra(t_node **stack_a)
 {
 	if (!rev_rotate(stack_a))
-		printf("rra\n");
+		ft_printf("rra\n");
 }
 
 void	rrb(t_node **stack_b)
 {
 	if (!rev_rotate(stack_b))
-		printf("rrb\n");
+		ft_printf("rrb\n");
 }
 
 void	rrr(t_node **stack_a, t_node **stack_b)
 {
 	if (!rev_rotate(stack_a) && !rev_rotate(stack_b))
-		printf("rrr\n");
+		ft_printf("rrr\n");
 }
