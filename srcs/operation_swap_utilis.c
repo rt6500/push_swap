@@ -15,5 +15,5 @@
 void	ss(t_node **stack_a, t_node **stack_b)
 {
 	if (!swap(stack_a) && !swap(stack_b))
-		printf("ss\n");
+		ft_printf("ss\n");
 }

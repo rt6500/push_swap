@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include "libft/srcs/gnl/get_next_line.h"
 #include "libft/srcs/printf/ft_printf.h"
 #include <limits.h>
 #include <stdlib.h>
@@ -25,18 +24,19 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
-void	print_nodes(t_node *stack_a, t_node *stack_b);
-
 // main.c
 int					main(int argc, char **argv);
 void				free_stack(t_node **stack);
 
 // validate_input.c
-int					has_duplicate(int argc, char **argv);
-int					is_invalid_number(char *str);
-int					is_one_elememt(char **array);
 char				**process_two_args(char **argv);
 int					validate_input(int argc, char **argv);
+
+// validate_input_utilis.c
+int					has_duplicate(int argc, char **argv);
+int					is_over_long_long(char *str, int sign);
+int					is_invalid_number(char *str);
+int					is_no_elememt(char **array);
 
 // ft_atoi_ps.c
 int					ft_atoi_ps(const char *str);

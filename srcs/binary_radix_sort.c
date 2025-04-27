@@ -12,7 +12,6 @@
 
 #include "../push_swap.h"
 
-
 void	sort_one_bit(t_node **a, t_node **b, int bit)
 {
 	int	size;
