@@ -13,6 +13,8 @@
 #include "../push_swap.h"
 
 //For printing an error message to standard output.
+//I didn't use this.
+
 void	print_error_and_exit(const char *message)
 {
 	write(2, "Error\n", 6);

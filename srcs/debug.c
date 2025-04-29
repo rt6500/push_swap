@@ -12,6 +12,7 @@
 
 #include "../push_swap.h"
 
+// code for debugging. This was not included to the submission.
 void	print_nodes(t_node *stack_a, t_node *stack_b)
 {
 	t_node	*cur;

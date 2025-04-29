@@ -60,19 +60,27 @@ int	is_over_long_long(char *str, int sign)
 	return (0);
 }
 
+static int	check_sign(char **str)
+{
+	int	sign;
+
+	sign = 1;
+	if (**str == '-' || **str == '+')
+	{
+		if (**str == '-')
+			sign = -1;
+		(*str)++;
+	}
+	return (sign);
+}
+
 int	is_invalid_number(char *str)
 {
 	long long	num;
 	int			sign;
 
 	num = 0;
-	sign = 1;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
+	sign = check_sign(&str);
 	if (!*str)
 		return (1);
 	if (is_over_long_long(str, sign))
@@ -84,7 +92,9 @@ int	is_invalid_number(char *str)
 		num = num * 10 + (*str - '0');
 		str++;
 	}
-	if (num > INT_MAX || num < INT_MIN)
+	if (sign == -1 && num == 2147483648)
+		return (0);
+	else if (num > INT_MAX)
 		return (1);
 	return (0);
 }

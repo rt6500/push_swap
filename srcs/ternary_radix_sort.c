@@ -12,6 +12,7 @@
 
 #include "../push_swap.h"
 
+//This code is not working due to the rack of normalization.
 int	get_trit(int rank, int pos)
 {
 	while (pos-- > 0)
@@ -70,8 +71,6 @@ void	sort_one_trit(t_node **a, t_node **b, int trit)
 		else
 			ra(a);
 	}
-	while (get_stack_size(*b) > 0)
-		pa(a, b);
 }
 
 int	ternary_radix_sort(t_node **a, t_node **b)
